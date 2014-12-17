@@ -1,7 +1,7 @@
 /* global angular,jQuery */
 (function ($) {
     angular.module('core')
-        .factory('i18nService', function ($http) {
+        .factory('i18nService', ['$http', function ($http) {
 
         var settings = {
             name: ['Msgs'],
@@ -37,8 +37,8 @@
 
         i18n.getLang = function(){
             return settings.language;
-        }
+        };
 
         return i18n;
-    });
+    }]);
 }(jQuery));

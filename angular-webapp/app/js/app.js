@@ -2,7 +2,7 @@
 (function () {
     'use strict';
 
-    angular.module('webinar', ['core', 'components', 'welcome', 'signup', 'ngRoute'])
+    angular.module('webinar', ['core', 'components', 'welcome', 'signup', 'ngRoute', 'templates-app'])
         .config(['$routeProvider', function ($routeProvider) {
             configureRouteProvider($routeProvider);
         }])
