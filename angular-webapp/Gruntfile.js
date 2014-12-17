@@ -6,6 +6,7 @@ module.exports = function(grunt) {
     require('time-grunt')(grunt);
 
     // Project configuration.
+    //noinspection JSUnresolvedFunction
     grunt.initConfig({
         pkg: grunt.file.readJSON('package.json'),
 
@@ -30,6 +31,17 @@ module.exports = function(grunt) {
             tpl: [ 'app/views/**/*.html' ]
         },
 
+        vendor_files: {
+            js: [
+                'bower_components/underscore/underscore-min.js',
+                'bower_components/jquery/jquery.js',
+                'bower_components/bootstrap-css/js/bootstrap.min.js',
+                'bower_components/angular/angular.js',
+                'bower_components/angular-route/angular-route.min.js',
+                'lib/i18n/jquery.i18n.properties-1.0.9.js'
+            ]
+        },
+
         /**
          * The directories to delete when `grunt clean` is executed.
          */
@@ -51,7 +63,7 @@ module.exports = function(grunt) {
             },
             dist: {
                 src: '<%= concat.compile_js.dest %>',
-                dest: '<%= compile_dir %>/<%= pkg.name %>-<%= pkg.version %>.min.js'
+                dest: '<%= compile_dir %>/<%= pkg.name %>-<%= pkg.version %>.js'
             }
         },
 
@@ -96,11 +108,9 @@ module.exports = function(grunt) {
                     banner: '/*! <%= pkg.name %> <%= grunt.template.today("yyyy-mm-dd") %> */\n'
                 },
                 src: [
-                    //'<%= vendor_files.js %>',
+                    '<%= vendor_files.js %>',
                     '<%= html2js.app.dest %>',
-                    //'module.prefix',
-                    '<%= app_files.js %>',
-                    //'module.suffix'
+                    '<%= app_files.js %>'
                 ],
                 dest: '<%= compile_dir %>/<%= pkg.name %>-<%= pkg.version %>.js'
             }
@@ -109,9 +119,7 @@ module.exports = function(grunt) {
 
 
     grunt.loadNpmTasks('grunt-contrib-clean');
-    grunt.loadNpmTasks('grunt-contrib-copy');
     grunt.loadNpmTasks('grunt-contrib-concat');
-    grunt.loadNpmTasks('grunt-contrib-watch');
     grunt.loadNpmTasks('grunt-contrib-uglify');
     grunt.loadNpmTasks('grunt-karma');
     grunt.loadNpmTasks('grunt-html2js');
@@ -126,7 +134,10 @@ module.exports = function(grunt) {
     //Build
     grunt.registerTask('build', ['clean', 'html2js', 'concat']);
 
+    //Development
     grunt.registerTask('development', ['test', 'build']);
+
+    //Production
     grunt.registerTask('production', ['test', 'build', 'uglify']);
 
 };
