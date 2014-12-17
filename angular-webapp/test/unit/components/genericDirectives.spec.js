@@ -48,6 +48,7 @@
                 var template = '<div active-if="active()">content</div>';
                 scope.active = jasmine.createSpy('active');
 
+                console.log(scope.active.andReturn);
                 scope.active.andReturn(true);
                 var element = compileAndLink(template, scope);
 

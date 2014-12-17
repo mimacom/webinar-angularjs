@@ -1,0 +1,24 @@
+{
+  "name": "webinar-angularJS",
+  "version": "0.0.1",
+  "description": "AngularJS & Grunt webinar",
+  "main": "index.html",
+  "authors": [
+    "mimacom"
+  ],
+  "private": true,
+  "devDependencies": {
+    "font-awesome": "4.1.0",
+    "jquery": "1.11.0",
+    "bootstrap": "2.3.2",
+    "angular": "1.2.15",
+    "angular-route": "1.2.15",
+    "angular-animate": "1.2.15",
+    "angular-mocks": "1.2.15",
+    "angular-resource": "1.2.15",
+    "angular-ui": "~0.4.0"
+  },
+  "dependencies": {
+    "angular-ui": "~0.4.0"
+  }
+}

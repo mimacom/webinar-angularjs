@@ -28,7 +28,8 @@ module.exports = function (config) {
             "app/js/signup/signupModule.js",
             "app/js/signup/signupService.js",
             "app/js/signup/signupCtrl.js",
-            "test/lib/**/*.js",
+            "test/lib/angular-mocks.js",
+            "test/lib/utils.js",
             "test/unit/**/components/*.js",
 //            "test/unit/**/core/*.js",
             "test/unit/**/signup/*.js"

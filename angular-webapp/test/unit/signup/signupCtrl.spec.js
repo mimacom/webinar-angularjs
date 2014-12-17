@@ -25,6 +25,7 @@
         });
 
          it('should call to signupService when function to singup is called', function () {
+             console.log(signupService.signup);
              signupService.signup.andCallFake(function(signup, success, error) {
                 expect(signup).toEqual({firstname: 'firstname',lastname: 'lastname',email: 'email@email.com'});
                 return false;
