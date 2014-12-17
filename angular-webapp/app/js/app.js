@@ -14,9 +14,9 @@
             }]);
 
     function configureRouteProvider(routeProvider) {
-        routeProvider.when('/', {templateUrl:'app/pages/welcome/welcome.html'});
-        routeProvider.when('/welcome', {templateUrl: 'app/pages/welcome/welcome.html'});
-        routeProvider.when('/signup', {controller: 'signupCtrl' , templateUrl: 'app/pages/signup/signup.html'});
+        routeProvider.when('/', {templateUrl:'app/views/welcome/welcome.html'});
+        routeProvider.when('/welcome', {templateUrl: 'app/views/welcome/welcome.html'});
+        routeProvider.when('/signup', {controller: 'signupCtrl' , templateUrl: 'app/views/signup/signup.html'});
         routeProvider.otherwise({redirectTo: '/welcome'});
     }
 
