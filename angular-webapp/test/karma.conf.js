@@ -14,11 +14,11 @@ module.exports = function (config) {
         // list of files / patterns to load in browser
         //noinspection JSUnresolvedVariable
         files: [
-            "lib/underscore/underscore-1.6.0.js",
-            "lib/jquery/jquery-2.1.0.js",
-            "lib/bootstrap/js/bootstrap.min.js",
-            "lib/angular/angular-1.2.13.js",
-            "lib/angular/angular-route-1.2.13.js",
+            "bower_components/underscore/underscore-min.js",
+            "bower_components/jquery/jquery.js",
+            "bower_components/bootstrap-css/js/bootstrap.min.js",
+            "bower_components/angular/angular.js",
+            "bower_components/angular-route/angular-route.min.js",
             "lib/i18n/jquery.i18n.properties-1.0.9.js",
             "app/js/app.js",
             "app/js/core/coreModule.js",
