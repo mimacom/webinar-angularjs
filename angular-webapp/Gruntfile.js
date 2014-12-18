@@ -5,6 +5,12 @@ module.exports = function(grunt) {
     require('load-grunt-tasks')(grunt);
     require('time-grunt')(grunt);
     //grunt.loadNpmTasks('time-grunt');
+
+    /**
+     * Load required Grunt tasks. These are installed based on the versions listed
+     * in `package.json` when you do `npm install` in this directory.
+     */
+
     grunt.loadNpmTasks('grunt-contrib-clean');
     grunt.loadNpmTasks('grunt-contrib-concat');
     grunt.loadNpmTasks('grunt-contrib-uglify');
@@ -19,7 +25,7 @@ module.exports = function(grunt) {
         pkg: grunt.file.readJSON('package.json'),
 
         temp_dir: 'temp', /** temp folder **/
-        build_dir: 'build', /** development **/
+        build_dir: 'dist', /** development **/
         compile_dir: 'dist', /** production **/
 
         app_files: {
@@ -131,6 +137,31 @@ module.exports = function(grunt) {
             all: [
                 '<%= app_files.js %>'
             ]
+        },
+
+        filesTemplate: {
+            karmaUnit: {
+                files: [
+                    '<%= vendor_files.js %>',
+                    'vendor/angular-mocks/angular-mocks.js',
+                    '<%= html2js.app.dest %>',
+                    '<%= html2js.common.dest %>',
+                    '<%= app_files.js %>',
+                    '<%= app_files.jsunit %>'
+                ],
+                src: 'tpls/karma.conf.tpl.js',
+                dest: '<%= temp_dir %>/karma.conf.js'
+            },
+            jsFilesLoader: {
+                files: [
+                    '<%= vendor_files.js %>',
+                    '<%= html2js.app.dest %>',
+                    '<%= app_files.js %>'
+                ],
+                //transformFile: replacePrefix.bind(null, ['<%= build_dir %>/', '<%= temp_dir %>/'], '<%= webapp_context %>'),
+                src: 'jsFilesLoader.tpl.js',
+                dest: '<%= build_dir %>/<%= pkg.name %>-<%= pkg.version %>.js'
+            }
         }
     });
 
@@ -141,15 +172,84 @@ module.exports = function(grunt) {
     grunt.registerTask('test', ['karma:singleRun']);
 
     //Analyze
-    //grunt.registerTask('analyze', ['jshint:all']);
+    //grunt.registerTask('analyze', ['jshint']);
 
     //Build
-    grunt.registerTask('build', ['clean', 'html2js', 'concat']);
+    grunt.registerTask('build', ['clean', 'html2js', 'filesTemplate:jsFilesLoader']);
+
+    grunt.registerTask('compile', ['clean', 'html2js', 'concat', 'uglify']);
 
     //Development
     grunt.registerTask('development', ['test', 'build']);
 
     //Production
-    grunt.registerTask('production', ['test', 'build', 'uglify']);
+    grunt.registerTask('production', ['test', 'compile']);
 
+
+    /**
+     *  In order to avoid having to specify manually the files needed for a file
+     * (i.e. a karma file or a main.less or a files loader) we use grunt to manage
+     *  the list of files for us. Yay!
+     */
+    grunt.registerMultiTask( 'filesTemplate', 'Process a file templates that needs to dynamically add an array of files', function () {
+        function identity (val){
+            return val;
+        }
+
+        function transformFiles(files, transform){
+            var transformedFiles = [];
+            files.forEach(function(file){
+                transformedFiles.push(transform(file));
+            });
+            return transformedFiles;
+        }
+
+        var data = this.data,
+            transformFile = data.transformFile || identity,
+            files = transformFiles(grunt.file.expand(data.files), transformFile),
+            srcTemplate = data.src,
+            destFile = data.dest;
+
+
+        grunt.file.copy( srcTemplate, destFile, {
+            process: function ( contents, path ) {
+                return grunt.template.process( contents, {
+                    data: {
+                        files: files,
+                        scripts: filterForJS(files),
+                        styles: filterForCSS(files),
+
+                    }
+                });
+            }
+        });
+    });
+
+    /**
+     * A utility function to get all app JavaScript sources.
+     */
+    function filterForJS ( files ) {
+        return files.filter( function ( file ) {
+            return file.match( /\.js$/ );
+        });
+    }
+
+    /**
+     * A utility function to get all app CSS sources.
+     */
+    function filterForCSS ( files ) {
+        return files.filter( function ( file ) {
+            return file.match( /\.css$/ );
+        });
+    }
+
+    function replacePrefix(prefixes, newPrefix, str){
+        prefixes = Array.isArray(prefixes) ? prefixes : [prefixes];
+        prefixes.forEach(function(prefix){
+            prefix = grunt.template.process(prefix);
+            str = str.replace(prefix, '')
+        });
+        newPrefix = grunt.template.process(newPrefix);
+        return newPrefix + str;
+    }
 };
