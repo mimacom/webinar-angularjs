@@ -2,9 +2,8 @@
  * Created by jalo on 12/05/2014.
  */
 module.exports = function(grunt) {
-    require('load-grunt-tasks')(grunt);
-    require('time-grunt')(grunt);
-    //grunt.loadNpmTasks('time-grunt');
+    //require('load-grunt-tasks')(grunt);
+    //require('time-grunt')(grunt);
 
     /**
      * Load required Grunt tasks. These are installed based on the versions listed
@@ -52,6 +51,7 @@ module.exports = function(grunt) {
                 'bower_components/bootstrap-css/js/bootstrap.min.js',
                 'bower_components/angular/angular.js',
                 'bower_components/angular-route/angular-route.min.js',
+                'bower_components/angular-local-storage/dist/angular-local-storage.min.js',
                 'lib/i18n/jquery.i18n.properties-1.0.9.js'
             ]
         },
@@ -171,12 +171,10 @@ module.exports = function(grunt) {
     //Test
     grunt.registerTask('test', ['karma:singleRun']);
 
-    //Analyze
-    //grunt.registerTask('analyze', ['jshint']);
-
     //Build
     grunt.registerTask('build', ['clean', 'html2js', 'filesTemplate:jsFilesLoader']);
 
+    //Compile
     grunt.registerTask('compile', ['clean', 'html2js', 'concat', 'uglify']);
 
     //Development
@@ -217,8 +215,7 @@ module.exports = function(grunt) {
                     data: {
                         files: files,
                         scripts: filterForJS(files),
-                        styles: filterForCSS(files),
-
+                        styles: filterForCSS(files)
                     }
                 });
             }

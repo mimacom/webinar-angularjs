@@ -2,9 +2,12 @@
 (function () {
     'use strict';
 
-    angular.module('webinar', ['core', 'components', 'welcome', 'signup', 'ngRoute', 'templates-app'])
+    angular.module('webinar', ['core', 'components', 'welcome', 'signup', 'ngRoute', 'templates-app', 'LocalStorageModule'])
         .config(['$routeProvider', function ($routeProvider) {
             configureRouteProvider($routeProvider);
+        }])
+        .config(['localStorageServiceProvider', function(localStorageServiceProvider){
+            localStorageServiceProvider.setPrefix('webinar');
         }])
         .run(['$rootScope', 'i18nService', function ($rootScope, i18nService) {
 

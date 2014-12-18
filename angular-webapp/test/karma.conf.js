@@ -19,6 +19,7 @@ module.exports = function (config) {
             "bower_components/bootstrap-css/js/bootstrap.min.js",
             "bower_components/angular/angular.js",
             "bower_components/angular-route/angular-route.min.js",
+            "bower_components/angular-local-storage/dist/angular-local-storage.min.js",
             "lib/i18n/jquery.i18n.properties-1.0.9.js",
             "app/js/app.js",
             "app/js/core/coreModule.js",
