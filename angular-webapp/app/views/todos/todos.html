@@ -1,24 +1,26 @@
 <div class="container">
-    <h2>My todos</h2>
+    <h2>{{i18n('webinar.my.todos')}}</h2>
 
     <!-- Todos input -->
     <form role="form" ng-submit="addTodo()">
         <div class="row">
             <div class="input-group">
-                <input type="text" ng-model="todo" placeholder="What needs to be done?" class="form-control">
+                <input type="text" ng-model="todo" placeholder="{{i18n('webinar.my.todos.placeholder')}}" class="form-control">
                 <!--<span class="input-group-btn">-->
-                  <input type="submit" class="btn btn-primary" value="Add">
+                <input type="submit" style="margin-top: -10px;" class="btn btn-primary" value="Add">
                 <!--</span>-->
             </div>
         </div>
 
-        <!-- Todos list -->
+        <div class="alert alert-info" role="alert" ng-show="isEmptyTodo">{{i18n('webinar.my.todos.info.message')}}</div>
+
         <input type="text" ng-model="searchString" placeholder="Search" class="form-control">
+        <!-- Todos list -->
 
         <p class="input-group" ng-repeat="todo in todos | filter:searchString">
             <input type="text" ng-model="todo" class="form-control">
             <!--<span class="input-group-btn">-->
-                <button class="btn btn-danger" ng-click="removeTodo($index)" aria-label="Remove">X</button>
+                <button class="btn btn-danger" style="margin-top: -10px;" ng-click="removeTodo($index)" aria-label="Remove">X</button>
             <!--</span>-->
         </p>
     </form>
