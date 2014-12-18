@@ -35,6 +35,8 @@ module.exports = function(grunt) {
                 'app/js/signup/signupModule.js',
                 'app/js/signup/signupService.js',
                 'app/js/signup/signupCtrl.js',
+                'app/js/todos/todosModule.js',
+                'app/js/todos/todosCtrl.js',
                 'app/js/app.js'
             ],
             jsunit: [

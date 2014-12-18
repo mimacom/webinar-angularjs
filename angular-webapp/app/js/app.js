@@ -2,7 +2,7 @@
 (function () {
     'use strict';
 
-    angular.module('webinar', ['core', 'components', 'welcome', 'signup', 'ngRoute', 'templates-app', 'LocalStorageModule'])
+    angular.module('webinar', ['core', 'components', 'welcome', 'signup', 'todos', 'ngRoute', 'templates-app', 'LocalStorageModule'])
         .config(['$routeProvider', function ($routeProvider) {
             configureRouteProvider($routeProvider);
         }])
@@ -20,6 +20,7 @@
         routeProvider.when('/', {templateUrl:'app/views/welcome/welcome.html'});
         routeProvider.when('/welcome', {templateUrl: 'app/views/welcome/welcome.html'});
         routeProvider.when('/signup', {controller: 'signupCtrl' , templateUrl: 'app/views/signup/signup.html'});
+        routeProvider.when('/todos', {controller: 'todosCtrl' , templateUrl: 'app/views/todos/todos.html'});
         routeProvider.otherwise({redirectTo: '/welcome'});
     }
 

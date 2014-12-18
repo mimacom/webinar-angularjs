@@ -43,8 +43,8 @@
                             <label for="email" class="mandatory">
                                 {{i18n('webinar.email')}}
                             </label>
-                            <input id="email" name="email" type="text" class="span12" ng-model="signup.contactEmail" required
-                                   maxlength="60">
+                            <input id="email" name="email" type="email" class="span12" ng-model="signup.contactEmail" required
+                                   maxlength="60" check-email>
                         </div>
                     </div>
 
@@ -61,7 +61,7 @@
                 <div class="span6 right-side-space"></div>
             </div>
             <div class="content-box-footer btn-right">
-                <button id="send" class="custom-icon custom-icon-accept form-right button-height">
+                <button id="send" type="submit" ng-disabled="signupForm.$invalid" class="custom-icon custom-icon-accept form-right button-height">
                     {{i18n('webinar.button.submit')}}
                 </button>
             </div>
