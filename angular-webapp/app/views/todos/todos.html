@@ -6,18 +6,20 @@
         <div class="row">
             <div class="input-group">
                 <input type="text" ng-model="todo" placeholder="What needs to be done?" class="form-control">
-        <span class="input-group-btn">
-          <input type="submit" class="btn btn-primary" value="Add">
-        </span>
+                <!--<span class="input-group-btn">-->
+                  <input type="submit" class="btn btn-primary" value="Add">
+                <!--</span>-->
             </div>
         </div>
 
         <!-- Todos list -->
-        <p class="input-group" ng-repeat="todo in todos">
+        <input type="text" ng-model="searchString" placeholder="Search" class="form-control">
+
+        <p class="input-group" ng-repeat="todo in todos | filter:searchString">
             <input type="text" ng-model="todo" class="form-control">
-            <span class="input-group-btn">
+            <!--<span class="input-group-btn">-->
                 <button class="btn btn-danger" ng-click="removeTodo($index)" aria-label="Remove">X</button>
-            </span>
+            <!--</span>-->
         </p>
     </form>
 </div>
