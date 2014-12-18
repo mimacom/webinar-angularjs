@@ -4,6 +4,14 @@
 module.exports = function(grunt) {
     require('load-grunt-tasks')(grunt);
     require('time-grunt')(grunt);
+    //grunt.loadNpmTasks('time-grunt');
+    grunt.loadNpmTasks('grunt-contrib-clean');
+    grunt.loadNpmTasks('grunt-contrib-concat');
+    grunt.loadNpmTasks('grunt-contrib-uglify');
+    grunt.loadNpmTasks('grunt-contrib-jshint');
+    grunt.loadNpmTasks('grunt-karma');
+    grunt.loadNpmTasks('grunt-html2js');
+
 
     // Project configuration.
     //noinspection JSUnresolvedFunction
@@ -114,22 +122,26 @@ module.exports = function(grunt) {
                 ],
                 dest: '<%= compile_dir %>/<%= pkg.name %>-<%= pkg.version %>.js'
             }
+        },
+
+        jshint: {
+            options: {
+                jshintrc: '.jshintrc'
+            },
+            all: [
+                '<%= app_files.js %>'
+            ]
         }
     });
 
-
-    grunt.loadNpmTasks('grunt-contrib-clean');
-    grunt.loadNpmTasks('grunt-contrib-concat');
-    grunt.loadNpmTasks('grunt-contrib-uglify');
-    grunt.loadNpmTasks('grunt-karma');
-    grunt.loadNpmTasks('grunt-html2js');
-
-
     // Default task(s).
-    grunt.registerTask('default', ['uglify']);
+    grunt.registerTask('default', ['build']);
 
     //Test
     grunt.registerTask('test', ['karma:singleRun']);
+
+    //Analyze
+    //grunt.registerTask('analyze', ['jshint:all']);
 
     //Build
     grunt.registerTask('build', ['clean', 'html2js', 'concat']);
