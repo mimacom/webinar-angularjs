@@ -1,5 +1,7 @@
 /* global angular,jQuery */
 (function ($) {
+    'use strict';
+
     angular.module('core')
         .factory('i18nService', ['$http', function ($http) {
 

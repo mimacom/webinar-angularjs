@@ -27,7 +27,7 @@
                     ngModelCtrl.$parsers.push(fromUser);
                 }
             };
-        }])
+        }]);
 
 }());
 

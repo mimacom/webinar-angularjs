@@ -1,4 +1,6 @@
 /* global angular */
 (function () {
-    angular.module('components', ['core'])
+    'use strict';
+
+    angular.module('components', ['core']);
 }());
