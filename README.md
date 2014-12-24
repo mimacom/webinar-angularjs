@@ -1,5 +1,5 @@
 # README for webinar-angularjs
-This repository is created to show a tipical multitier web application using technologies like Java, Spring, SpringMVC, Bootstrap and AngularJS. This repo will evolve with the broadcast of several webinars, starting with the first one regarding the thecnologies sued in the frontend development.
+This repository is created to show a tipical multitier web application using technologies like Java, Spring, SpringMVC, Bootstrap and AngularJS. This repo will evolve with the broadcast of several webinars, starting with the first one regarding the technologies used in the frontend development.
 
 ## Module angular-core
 Empty for the moment
